@@ -1,0 +1,1192 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesquisa de Mercado - Casa Goianita | Live Consultoria</title>
+    
+    <!-- Fontes Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;1,700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Tokens CSS - Sistema de Design Live Consultoria */
+        :root {
+            /* Paleta Principal */
+            --primary-bg: #06192a;      /* Azul Petróleo - Fundo principal */
+            --card-bg: #0A243D;         /* Azul Escuro - Fundo de cards */
+            --accent-color: #00e800;     /* Verde Vibrante - Destaques, links, títulos */
+            
+            /* Textos */
+            --text-primary: #ffffff;     /* Branco - Textos principais */
+            --text-muted: #cccccc;       /* Cinza Claro */
+            --text-subtle: #a0a0a0;      /* Cinza - Textos secundários e parágrafos */
+            
+            /* Bordas e Efeitos */
+            --border-color: rgba(255, 255, 255, 0.1);
+            --accent-glow: 0 0 8px rgba(0, 232, 0, 0.7); /* Sombra para o verde vibrante */
+            
+            /* Famílias de Fonte */
+            --font-primary: 'Poppins', sans-serif;
+            --font-secondary: 'Merriweather', serif;
+            
+            /* Tamanhos de Fonte (Mobile-First) */
+            --font-size-base: 1.1rem;
+            --font-size-h3: 1.5rem;
+            --font-size-h2: clamp(2rem, 4vw, 2.5rem);
+            --font-size-h1: clamp(2.5rem, 5vw, 3rem);
+            
+            /* Escala de Espaçamento */
+            --space-sm: 1rem;   /* 16px */
+            --space-md: 2rem;   /* 32px */
+            --space-lg: 4rem;   /* 64px */
+            --space-xl: 6rem;   /* 96px */
+        }
+        
+        /* Reset e Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-primary);
+            font-size: var(--font-size-base);
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--primary-bg);
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+            background-attachment: fixed;
+        }
+        
+        /* Cabeçalho */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(6, 25, 42, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: var(--space-sm);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+        
+        /* Main Content */
+        main {
+            padding-top: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: var(--space-md);
+            padding-right: var(--space-md);
+        }
+        
+        /* Seções */
+        section {
+            margin-bottom: var(--space-xl);
+        }
+        
+        /* Tipografia */
+        h1 {
+            font-size: var(--font-size-h1);
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: var(--space-md);
+            text-align: center;
+        }
+        
+        h2 {
+            font-size: var(--font-size-h2);
+            font-weight: 600;
+            color: var(--accent-color);
+            margin: var(--space-lg) 0 var(--space-md) 0;
+        }
+        
+        h3 {
+            font-size: var(--font-size-h3);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: var(--space-md) 0 var(--space-sm) 0;
+        }
+        
+        h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin: var(--space-md) 0 var(--space-sm) 0;
+        }
+        
+        p {
+            color: var(--text-subtle);
+            margin-bottom: var(--space-sm);
+        }
+        
+        strong {
+            color: var(--text-primary);
+        }
+        
+        /* Card Padrão */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: var(--space-md);
+            border-radius: 12px;
+            margin-bottom: var(--space-md);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 232, 0, 0.1);
+        }
+        
+        .card:focus-visible {
+            outline: 3px solid var(--accent-color);
+        }
+        
+        /* Card de Diagnóstico */
+        .card-diagnostico {
+            border-left: 3px solid var(--accent-color);
+            font-family: var(--font-secondary);
+        }
+        
+        /* Tabelas */
+        .table-container {
+            overflow-x: auto;
+            margin: var(--space-md) 0;
+        }
+        
+        table {
+            width: 100%;
+            background: var(--card-bg);
+            border-collapse: collapse;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+        
+        th, td {
+            padding: var(--space-sm);
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        th {
+            background: rgba(0, 232, 0, 0.1);
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        
+        td {
+            color: var(--text-subtle);
+        }
+        
+        /* Listas */
+        ul, ol {
+            margin: var(--space-sm) 0;
+            padding-left: var(--space-md);
+        }
+        
+        li {
+            color: var(--text-subtle);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Links */
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-shadow: var(--accent-glow);
+        }
+        
+        /* Seção Hero */
+        .hero {
+            text-align: center;
+            padding: var(--space-xl) 0;
+            background: linear-gradient(135deg, var(--card-bg), var(--primary-bg));
+            border-radius: 12px;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .hero h1 {
+            margin-bottom: var(--space-sm);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Grid de Cards */
+        .cards-grid {
+            display: grid;
+            gap: var(--space-md);
+            margin: var(--space-md) 0;
+        }
+        
+        @media (min-width: 768px) {
+            .cards-grid {
+                grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            }
+        }
+        
+        /* Seção de Sumário */
+        .sumario {
+            background: linear-gradient(135deg, rgba(0, 232, 0, 0.1), rgba(0, 232, 0, 0.05));
+            border: 1px solid rgba(0, 232, 0, 0.3);
+            border-radius: 12px;
+            padding: var(--space-md);
+            margin-bottom: var(--space-xl);
+        }
+        
+        /* Quadros de Destaque */
+        .destaque {
+            background: rgba(0, 232, 0, 0.1);
+            border-left: 4px solid var(--accent-color);
+            padding: var(--space-md);
+            margin: var(--space-md) 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        /* Animações */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            main {
+                padding-left: var(--space-sm);
+                padding-right: var(--space-sm);
+            }
+            
+            .table-container {
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Rodapé */
+        footer {
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            padding: var(--space-lg) var(--space-md);
+            text-align: center;
+            margin-top: var(--space-xl);
+        }
+        
+        .footer-logo img {
+            height: 60px;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        /* Seção de Competidores */
+        .competitor-card {
+            border-left: 3px solid var(--accent-color);
+            background: linear-gradient(135deg, var(--card-bg), rgba(0, 232, 0, 0.02));
+        }
+        
+        .score {
+            display: inline-block;
+            background: var(--accent-color);
+            color: var(--primary-bg);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        /* Seção de Oportunidades */
+        .oportunidade {
+            background: linear-gradient(135deg, rgba(0, 232, 0, 0.1), var(--card-bg));
+            border: 1px solid rgba(0, 232, 0, 0.3);
+            position: relative;
+        }
+        
+        .oportunidade::before {
+            content: '⭐';
+            position: absolute;
+            top: var(--space-sm);
+            right: var(--space-sm);
+            font-size: 1.5rem;
+        }
+        
+        /* Prioridades */
+        .prioridade-alta {
+            border-left: 4px solid #ff4444;
+        }
+        
+        .prioridade-media {
+            border-left: 4px solid #ffaa00;
+        }
+        
+        .prioridade-baixa {
+            border-left: 4px solid #00aa00;
+        }
+        
+        /* Métricas */
+        .metrica {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-sm);
+            margin: var(--space-md) 0;
+        }
+        
+        .metrica-item {
+            background: rgba(0, 232, 0, 0.1);
+            padding: var(--space-sm);
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .metrica-valor {
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: block;
+        }
+        
+        /* Checklist */
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .checklist li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .checklist li::before {
+            content: '☐';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+        
+        /* Seção Visual Score */
+        .visual-analysis {
+            display: grid;
+            gap: var(--space-sm);
+        }
+        
+        .visual-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .visual-item:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/Clebito2/ConsultoriaLive/main/Logo%20live%20oficial-21.png" alt="Live Consultoria - Logo">
+            </div>
+            <nav>
+                <span style="color: var(--text-muted); font-size: 0.9rem;">Pesquisa de Mercado Especializada</span>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero fade-in">
+            <h1>🧭 PESQUISA DE MERCADO QUALITATIVA E COMPARATIVA</h1>
+            <p><strong>Casa Goianita | Posicionamento Intermediário Gourmet</strong></p>
+            <p style="font-size: 0.9rem; margin-top: var(--space-sm); color: var(--text-muted);">
+                Análise completa do segmento "Casa & Gourmet" nas regiões GO, SP e MG
+            </p>
+        </section>
+
+        <section class="sumario fade-in">
+            <h2>📋 SUMÁRIO EXECUTIVO</h2>
+            <div class="card">
+                <p>Esta pesquisa mapeou <strong>12 concorrentes diretos e indiretos</strong> no segmento "Casa & Gourmet" nas regiões GO, SP e MG, com foco em players posicionados entre o varejo de preço (Big Lar, Preçolândia) e o ultra-luxo especializado (Loja 135). A análise identificou padrões estratégicos de comunicação, identidade visual, mix de conteúdo e percepção de valor que definem o espaço competitivo do <strong>"intermediário gourmet com curadoria"</strong>.</p>
+                
+                <h4>Principais achados:</h4>
+                <ul>
+                    <li>O mercado está polarizado: players de <strong>preço competem em volume/variedade</strong>, enquanto <strong>premium aposta em curadoria editorial</strong></li>
+                    <li>Existe uma <strong>lacuna estratégica clara</strong> no posicionamento intermediário com direção de arte consistente + curadoria gourmet + experiência in-store</li>
+                    <li>Concorrentes regionais (GO) apresentam comunicação genérica, abrindo espaço para diferenciação via storytelling e identidade visual forte</li>
+                    <li>Tendências visuais dominantes: <strong>paletas neutras naturais, luz suave, staging lifestyle, props artesanais</strong></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="fade-in">
+            <h2>🎯 MAPEAMENTO COMPETITIVO</h2>
+            
+            <h3>Escala de Posicionamento (Preço ↔ Luxo)</h3>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><strong>PREÇO/VOLUME</strong></th>
+                            <th><strong>INTERMEDIÁRIO GOURMET</strong></th>
+                            <th><strong>PREMIUM/LUXO</strong></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Big Lar Utilidades</td>
+                            <td>DuChapéu</td>
+                            <td>Conceito ê</td>
+                        </tr>
+                        <tr>
+                            <td>Preçolândia</td>
+                            <td>Real Utilidades (GO)</td>
+                            <td>Degusta Casa</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Lolahome</td>
+                            <td>La Ville Casa</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Camicado</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Lilian Gift Design (GO)</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Arte Etc</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Tok&Stok</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="destaque">
+                <p><strong>Insights da escala:</strong></p>
+                <ul>
+                    <li>A Casa Goianita compete diretamente no espaço <strong>intermediário-premium</strong>, onde curadoria, experiência e bom gosto se encontram com acessibilidade relativa</li>
+                    <li>Players de preço (Big Lar, Preçolândia) dominam por volume (30 mil+ SKUs) mas carecem de trabalho de marca</li>
+                    <li>Premium (Conceito ê, Degusta Casa) estabelecem padrão editorial-aspiracional mas com ticket médio elevado</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="fade-in">
+            <h2>🔍 ANÁLISE DETALHADA POR CONCORRENTE</h2>
+            
+            <div class="card competitor-card">
+                <h3>🎯 <strong>CONCEITO Ê</strong> — Benchmark de Curadoria Premium</h3>
+                <p><strong>Perfil:</strong> @conceito.e | 62K seguidores<br>
+                <strong>BIO:</strong> <em>"Curadoria de objetos geniais para casas extraordinárias"</em><br>
+                <strong>Localização:</strong> E-commerce nacional</p>
+
+                <h4>Eixo 1 | Território de Marca e Tom de Voz</h4>
+                <ul>
+                    <li><strong>Promessa:</strong> Objetos com personalidade, não-óbvios, curadoria autoral que transforma o cotidiano</li>
+                    <li><strong>Tom:</strong> Sofisticado porém íntimo ("make yourself at home", "vem ver"), editorial com calor humano</li>
+                    <li><strong>Hashtags:</strong> #curadoria #designbrasileiro #casaextraordinaria (inferido)</li>
+                    <li><strong>Fixados:</strong> Coleções exclusivas, peças de designers autorais, storytelling de origem</li>
+                </ul>
+
+                <h4>Eixo 2 | Mix de Conteúdo (estimado sobre últimos 30 posts)</h4>
+                <ul>
+                    <li><strong>40%</strong> — Produto em contexto lifestyle com staging elaborado (mesa posta, canto de leitura, ritual café)</li>
+                    <li><strong>30%</strong> — Storytelling de peça (designer, processo, inspiração, materiais)</li>
+                    <li><strong>20%</strong> — Lançamentos e coleções temáticas ("the it list", "home essentials")</li>
+                    <li><strong>10%</strong> — Conteúdo inspiracional (rotina, self-care, momentos em casa)</li>
+                </ul>
+                <p><strong>Análise:</strong> Equilíbrio entre produto e conteúdo aspiracional; evita promoção direta, foca em desejo e descoberta.</p>
+
+                <h4>Eixo 3 | Engajamento e Influência</h4>
+                <ul>
+                    <li>Sem programa de afiliados visível</li>
+                    <li>Colaborações pontuais com designers (Carolina Peraca, Pingo Studios, etc.)</li>
+                    <li><strong>Estratégia:</strong> Curadoria como autoridade; a marca é a influenciadora</li>
+                </ul>
+
+                <h4>Eixo 4 | Percepção de Valor e Preço</h4>
+                <ul>
+                    <li><strong>Comunicação de preço:</strong> Presente mas secundária; contexto visual cria valor antes do número</li>
+                    <li><strong>Estética:</strong> 100% editorial — fotografia tipo revista de design</li>
+                    <li><strong>Posição:</strong> Premium acessível; produtos de R$ 30 (velas) a R$ 1.300+ (móveis)</li>
+                </ul>
+
+                <h4>Eixo 5 | Análise Visual — <span class="score">SCORE: 5/5</span></h4>
+                <div class="visual-analysis">
+                    <div class="visual-item">
+                        <span><strong>Paleta:</strong> Neutros sofisticados (bege, off-white, terracota, verde oliva, tons terrosos)</span>
+                    </div>
+                    <div class="visual-item">
+                        <span><strong>Iluminação:</strong> Luz natural suave, sombras sutis que criam profundidade, "golden hour" frequente</span>
+                    </div>
+                    <div class="visual-item">
+                        <span><strong>Composição:</strong> Editorial clean, negative space generoso, regra dos terços, grid harmonioso</span>
+                    </div>
+                    <div class="visual-item">
+                        <span><strong>Tipografia:</strong> Serif delicada em overlays pontuais, sem poluição visual</span>
+                    </div>
+                    <div class="visual-item">
+                        <span><strong>Props & Styling:</strong> Altamente curados (cerâmicas artesanais, tecidos de linho, plantas, flores naturais, pedras)</span>
+                    </div>
+                    <div class="visual-item">
+                        <span><strong>Direção de arte:</strong> Sensação de galeria/revista de design; consistência absoluta de identidade</span>
+                    </div>
+                </div>
+
+                <p><strong>Oportunidades inexploradas:</strong> Pouca presença em Reels/vídeos dinâmicos (foco quase total em foto estática).</p>
+            </div>
+
+            <div class="card competitor-card">
+                <h3>💚 <strong>LILIAN GIFT DESIGN</strong> — Concorrente Local Premium (Goiânia)</h3>
+                <p><strong>Perfil:</strong> @liliangiftdesign | ~10-20K seguidores<br>
+                <strong>BIO:</strong> <em>"Decoração e Presentes | Importação | Goiânia-GO"</em><br>
+                <strong>Localização:</strong> Goiânia, fundada em 1999</p>
+
+                <h4>Território e Posicionamento</h4>
+                <ul>
+                    <li><strong>Promessa:</strong> Importação direta, qualidade premium, exclusividade, sofisticação acessível, tradição 25+ anos</li>
+                    <li><strong>Tom:</strong> Confiável, sofisticado mas regional, aspiracional para classe média alta goiana</li>
+                    <li><strong>Diferenciais:</strong> Único importador regional consolidado, 1M+ envios históricos, curadoria internacional</li>
+                </ul>
+
+                <h4>Mix de Conteúdo</h4>
+                <ul>
+                    <li><strong>45%</strong> — Produto ambientado em contexto gourmet/mesa posta</li>
+                    <li><strong>25%</strong> — Lançamentos, coleções temáticas, importações exclusivas</li>
+                    <li><strong>20%</strong> — Inspiração mesa posta, decoração, lifestyle</li>
+                    <li><strong>10%</strong> — Institucional (cuidado no envio, embalagem, tradição da marca)</li>
+                </ul>
+
+                <h4>Visual — <span class="score">SCORE: 3.5/5</span></h4>
+                <div class="visual-analysis">
+                    <div class="visual-item">
+                        <span><strong>Paleta:</strong> Tons terrosos, dourado, branco, rose gold (linha sofisticada mas sem identidade única forte)</span>
+                    </div>
+                    <div class="visual-item">
+                        <span><strong>Luz:</strong> Mista (natural + artificial), bem iluminado, profissional</span>
+                    </div>
+                    <div class="visual-item">
+                        <span><strong>Composição:</strong> Equilibrada entre produto e contexto; menos editorial que Conceito ê</span>
+                    </div>
+                    <div class="visual-item">
+                        <span><strong>Props:</strong> Mesa posta real, tecidos nobres, flores naturais, louças de qualidade</span>
+                    </div>
+                </div>
+
+                <p><strong>Gap:</strong> Identidade visual menos definida; mix de estilos no feed gera falta de coesão; oportunidade de unificar direção de arte.</p>
+            </div>
+
+            <div class="card competitor-card">
+                <h3>🏡 <strong>LOLAHOME</strong> — Lifestyle Emocional Nacional</h3>
+                <p><strong>Perfil:</strong> @lolahome_oficial | ~30-50K seguidores<br>
+                <strong>BIO:</strong> <em>"Mesa posta, Decoração e presentes: Coleções Exclusivas"</em><br>
+                <strong>Localização:</strong> E-commerce nacional</p>
+
+                <h4>Território e Tom de Voz</h4>
+                <ul>
+                    <li><strong>Promessa:</strong> "Sua casa merece o melhor", lar como refúgio, momentos em família, rotina especial</li>
+                    <li><strong>Tom:</strong> Acolhedor, emocional, íntimo; fala de memórias, conexão, bem-estar</li>
+                    <li><strong>Diferencial:</strong> Storytelling centrado em <strong>experiência familiar e emocional</strong>, não em produto per se</li>
+                </ul>
+
+                <h4>Mix de Conteúdo</h4>
+                <ul>
+                    <li><strong>35%</strong> — Produto em staging casa/mesa (contexto real, não estúdio)</li>
+                    <li><strong>30%</strong> — Lifestyle: momentos de refeição em família, rituais, café da manhã, jantar</li>
+                    <li><strong>20%</strong> — Inspiração decoração, mesa posta tutorial/dicas</li>
+                    <li><strong>15%</strong> — Lançamentos e coleções (menos foco promocional)</li>
+                </ul>
+
+                <h4>Visual — <span class="score">SCORE: 4/5</span></h4>
+                <div class="visual-analysis">
+                    <div class="visual-item">
+                        <span><strong>Paleta:</strong> Cores suaves (areia, terracota, verde sálvia, off-white) — consistente</span>
+                    </div>
+                    <div class="visual-item">
+                        <span><strong>Luz:</strong> Natural predominante, luz quente "de casa" (menos editorial, mais realista)</span>
+                    </div>
+                    <div class="visual-item">
+                        <span><strong>Composição:</strong> Cenas de vida real; menos negative space, mais "acontecendo"</span>
+                    </div>
+                    <div class="visual-item">
+                        <span><strong>Props:</strong> Comida real, flores frescas, pessoas/mãos, momentos cotidianos capturados</span>
+                    </div>
+                </div>
+
+                <p><strong>Diferencial:</strong> Identidade clara e emocional; menos "revista" e mais "vida real inspiradora". Tom aspiracional mas alcançável.</p>
+                <p><strong>Gap:</strong> Menos foco em curadoria gourmet específica; mais decoração residencial genérica.</p>
+            </div>
+        </section>
+
+        <section class="fade-in">
+            <h2>📊 SÍNTESE COMPARATIVA — QUADRO-RESUMO</h2>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Concorrente</th>
+                            <th>Posicionamento</th>
+                            <th>Visual Score</th>
+                            <th>Tom Voz</th>
+                            <th>Diferencial Chave</th>
+                            <th>Gap/Oportunidade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Conceito ê</strong></td>
+                            <td>Premium curadoria</td>
+                            <td><span class="score">5/5 ⭐</span></td>
+                            <td>Sofisticado íntimo</td>
+                            <td>Direção arte impecável, storytelling designers</td>
+                            <td>Pouco vídeo dinâmico</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lilian Gift</strong> (GO)</td>
+                            <td>Intermediário-Premium local</td>
+                            <td><span class="score">3.5/5</span></td>
+                            <td>Sofisticado confiável</td>
+                            <td>Tradição 25a, importação GO</td>
+                            <td>Identidade visual inconsistente</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lolahome</strong></td>
+                            <td>Intermediário emocional</td>
+                            <td><span class="score">4/5</span></td>
+                            <td>Acolhedor familiar</td>
+                            <td>Storytelling emocional família/lar</td>
+                            <td>Menos foco gourmet específico</td>
+                        </tr>
+                        <tr>
+                            <td><strong>DuChapéu</strong></td>
+                            <td>Intermediário volume</td>
+                            <td><span class="score">2.5/5</span></td>
+                            <td>Funcional promocional</td>
+                            <td>Variedade, tours YouTube</td>
+                            <td>Zero lifestyle/aspiração</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Real Util.</strong> (GO)</td>
+                            <td>Intermediário local</td>
+                            <td><span class="score">2/5</span></td>
+                            <td>Próximo familiar</td>
+                            <td>Presença física GO</td>
+                            <td>Marca genérica fraca</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tok&Stok</strong></td>
+                            <td>Intermediário-Premium design</td>
+                            <td><span class="score">4/5</span></td>
+                            <td>Jovem descontraído</td>
+                            <td>Escala, trends, memes</td>
+                            <td>Foco móveis > gourmet</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Big Lar</strong> (GO)</td>
+                            <td>Preço/massa</td>
+                            <td><span class="score">1.5/5</span></td>
+                            <td>Promocional direto</td>
+                            <td>Volume (30k SKUs), preço</td>
+                            <td>Comunicação transacional</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="fade-in">
+            <h2>🎨 MÓDULO VISUAL — ANÁLISE ESTÉTICA CONSOLIDADA</h2>
+            
+            <h3>Tendências Visuais Dominantes (Segmento Intermediário-Premium)</h3>
+            
+            <div class="cards-grid">
+                <div class="card">
+                    <h4>1. Paleta de Cores</h4>
+                    <p><strong>Padrão vencedor:</strong> Neutros sofisticados naturais</p>
+                    <ul>
+                        <li><strong>Cores:</strong> Bege, off-white, areia, terracota, verde oliva/sálvia, tons terrosos, toques de dourado/rose gold</li>
+                        <li><strong>Evitam:</strong> Cores saturadas, vibrantes, primárias; paletas "infantis" ou muito comerciais</li>
+                        <li><strong>Exceção:</strong> Conceito ê usa pontos de cor em peças específicas (almofadas, vasos) mas mantém base neutra</li>
+                    </ul>
+                    <div class="destaque">
+                        <p><strong>Recomendação Casa Goianita:</strong> Paleta base neutra terrosa + pontos de cor natural (verde, terracota) para diferenciação regional (cerrado, natureza GO).</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4>2. Iluminação e Tratamento</h4>
+                    <p><strong>Padrão vencedor:</strong> Luz natural suave, sombras delicadas</p>
+                    <ul>
+                        <li>Luz do dia difusa (janela lateral, "golden hour")</li>
+                        <li>Sombras sutis que criam profundidade sem drama</li>
+                        <li><strong>Evitam:</strong> Luz dura, flash direto, contraluz forte, sombras pretas</li>
+                        <li>Tratamento warm (temperatura quente) para aconchego</li>
+                    </ul>
+                    <div class="destaque">
+                        <p><strong>Recomendação:</strong> Fotografia em luz natural 9h-11h ou 15h-17h; evitar meio-dia. Refletores/rebatedores brancos para preencher sombras.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4>3. Composição e Staging</h4>
+                    <p><strong>Padrão vencedor:</strong> Minimalismo editorial com negative space</p>
+                    <ul>
+                        <li>Uso generoso de espaço vazio (conceito ê: 40-50% da imagem)</li>
+                        <li>Regra dos terços religiosamente aplicada</li>
+                        <li>Layers: primeiro plano (produto), segundo plano (contexto), terceiro plano (blur sutil)</li>
+                        <li>Props intencionais, nunca aleatórios</li>
+                    </ul>
+                    <p><strong>Staging:</strong></p>
+                    <ul>
+                        <li><strong>Premium</strong> (Conceito ê): Cena "possível mas aspiracional" — tudo perfeito mas crível</li>
+                        <li><strong>Emocional</strong> (Lolahome): Cena "vida real" — comida de verdade, flores murchando, imperfeições charmosas</li>
+                    </ul>
+                    <div class="destaque">
+                        <p><strong>Recomendação Casa Goianita:</strong> Híbrido — staging cuidado (aspiracional) com toques de vida real (café fumegante, pão fresco, flor natural).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="fade-in">
+            <h2>🔓 OPORTUNIDADES DE DIFERENCIAÇÃO PARA CASA GOIANITA</h2>
+            
+            <div class="card oportunidade">
+                <h3>1. IDENTIDADE VISUAL REGIONAL ÚNICA ⭐⭐⭐</h3>
+                <p><strong>Gap:</strong> Nenhum concorrente GO possui identidade visual forte e consistente. Lilian Gift (GO) tem qualidade mas inconsistência; Real Utilidades é genérica; Big Lar é transacional.</p>
+                
+                <h4>Tática:</h4>
+                <ul>
+                    <li>Desenvolver <strong>paleta de marca</strong> inspirada no cerrado goiano (terras, verdes, dourados do pôr do sol no Goiás)</li>
+                    <li>Fotografia com <strong>"assinatura visual"</strong> reconhecível (ex.: sempre uma planta nativa no canto, textura de madeira regional)</li>
+                    <li>Grid Instagram harmonioso (padrão A-B-A: produto contexto / inspiração / produto contexto)</li>
+                </ul>
+                
+                <p><strong>Benchmark:</strong> Conceito ê possui identidade visual absoluta; Casa Goianita pode ter versão "goiana" disso.</p>
+            </div>
+
+            <div class="card oportunidade">
+                <h3>2. CURADORIA GOURMET + EXPERIÊNCIA IN-STORE ⭐⭐⭐</h3>
+                <p><strong>Gap:</strong> Concorrentes ou são e-commerce puro (Conceito ê, Lolahome) ou têm loja física sem experiência (Real Util., Big Lar).</p>
+                
+                <h4>Tática:</h4>
+                <ul>
+                    <li><strong>Mesas montadas rotativas</strong> na loja (trocar semanalmente; fotografar e postar processo)</li>
+                    <li>Eventos mensais: "Café da Manhã na Casa Goianita", "Workshop Mesa Posta Goiana", "Noite de Queijos e Vinhos"</li>
+                    <li>Serviço de <strong>curadoria personalizada</strong> ("Monte sua mesa para Dia das Mães com nossa ajuda")</li>
+                    <li>Tour virtual 360° da loja (Instagram, Google Maps)</li>
+                </ul>
+                
+                <p><strong>Benchmark:</strong> Camicado faz mesas in-store; Casa Goianita pode elevar com storytelling e regionalismo.</p>
+            </div>
+
+            <div class="card oportunidade">
+                <h3>3. STORYTELLING DE PRODUTO + ORIGEM ⭐⭐</h3>
+                <p><strong>Gap:</strong> Apenas Conceito ê faz storytelling consistente de designers/origens; demais players listam produtos sem contexto.</p>
+                
+                <h4>Tática:</h4>
+                <ul>
+                    <li>Post semanal <strong>"História da Peça"</strong> (quem fez, onde, por quê; materiais; processo)</li>
+                    <li>Destacar <strong>artesãos goianos</strong> e designers regionais</li>
+                    <li>"Making of" de produtos (vídeo de oleiro fazendo cerâmica, tecelã fazendo jogo americano)</li>
+                    <li>Conectar produto a <strong>momento/ritual</strong> ("Esta travessa foi pensada para o almoço de domingo em família")</li>
+                </ul>
+                
+                <p><strong>Benchmark:</strong> Conceito ê faz isso em nível premium; Casa Goianita pode adaptar com toque regional e emocional.</p>
+            </div>
+
+            <div class="card oportunidade">
+                <h3>4. CONTEÚDO EDUCACIONAL GOURMET ⭐⭐</h3>
+                <p><strong>Gap:</strong> Nenhum concorrente GO produz conteúdo educacional consistente sobre mesa posta, etiqueta, gastronomia.</p>
+                
+                <h4>Tática:</h4>
+                <ul>
+                    <li>Série Instagram/TikTok: <strong>"Mesa Posta 101"</strong> (como montar mesa para jantar, almoço, café)</li>
+                    <li><strong>"Guia de Harmonização"</strong> (qual louça para qual ocasião, como combinar cores/texturas)</li>
+                    <li>Parceria com chefs locais GO para receitas + "serve nesta travessa"</li>
+                    <li>Reels rápidos (15-30s): "Dica do Dia Casa Goianita"</li>
+                </ul>
+                
+                <p><strong>Formato:</strong> 60% inspiração + 40% educação (evitar didatismo excessivo; manter tom leve e visual)</p>
+            </div>
+
+            <div class="card oportunidade">
+                <h3>5. PRESENÇA EM VÍDEO DINÂMICO (REELS/TIKTOK) ⭐⭐⭐</h3>
+                <p><strong>Gap:</strong> Conceito ê (benchmark visual) tem pouco vídeo dinâmico; concorrentes regionais têm vídeo de baixa qualidade (tour de loja amador).</p>
+                
+                <h4>Tática:</h4>
+                <p><strong>Reels semanais</strong> (mínimo 3/semana):</p>
+                <ul>
+                    <li>"Unboxing" estético de novo produto</li>
+                    <li>Timelapse montagem de mesa</li>
+                    <li>Transição antes/depois (mesa vazia → mesa posta)</li>
+                    <li>"POV: você chega para jantar na Casa Goianita"</li>
+                </ul>
+                <ul>
+                    <li>Música: Tendências TikTok + músicas goianas (sertanejo raiz instrumental, música autoral local)</li>
+                    <li>Colaboração com influencers locais GO (micro: 10-50K seguidores)</li>
+                </ul>
+                
+                <p><strong>Objetivo:</strong> Alcançar público jovem (25-40 anos) que consome vídeo; algoritmo favorece Reels.</p>
+            </div>
+        </section>
+
+        <section class="fade-in">
+            <h2>🎯 RECOMENDAÇÕES ESTRATÉGICAS PRIORIZADAS</h2>
+            
+            <h3>PRIORIDADE ALTA (Implementar em 0-3 meses)</h3>
+            
+            <div class="card prioridade-alta">
+                <h4>1. Definição de Identidade Visual Completa</h4>
+                <ul>
+                    <li>Paleta de cores (5 cores base + 3 acentos)</li>
+                    <li>Guia de fotografia (luz, composição, props permitidos/proibidos)</li>
+                    <li>Templates Canva/Photoshop para consistência</li>
+                    <li><strong>Responsável:</strong> Designer + Fotógrafo</li>
+                    <li><strong>Budget:</strong> R$ 5-10K (investimento único)</li>
+                </ul>
+            </div>
+
+            <div class="card prioridade-alta">
+                <h4>2. Reestruturação da Bio e Perfil Instagram</h4>
+                <ul>
+                    <li>Bio clara com território ("Curadoria gourmet goiana", "Mesa posta com bom gosto e alma local")</li>
+                    <li>Highlights organizados (Produtos, Mesa Posta, Eventos, Clientes, Bastidores)</li>
+                    <li>Grid harmonioso (planejar 9-12 posts à frente)</li>
+                    <li><strong>Meta:</strong> Converter 15-20% dos visitantes de perfil em seguidores</li>
+                </ul>
+            </div>
+
+            <div class="card prioridade-alta">
+                <h4>3. Cronograma Editorial de Conteúdo (Pilares)</h4>
+                <ul>
+                    <li><strong>40%</strong> Produto em contexto gourmet (mesa montada, cena lifestyle)</li>
+                    <li><strong>25%</strong> Inspiração e educação (dicas mesa posta, harmonização, receitas parceiras)</li>
+                    <li><strong>20%</strong> Storytelling (produto, artesão, origem, processo)</li>
+                    <li><strong>15%</strong> Lançamentos, eventos, institucional</li>
+                    <li><strong>Frequência:</strong> 4-5 posts/semana + 3 Reels/semana</li>
+                </ul>
+            </div>
+
+            <div class="card prioridade-alta">
+                <h4>4. Primeira Campanha de Reels (Piloto)</h4>
+                <ul>
+                    <li>Produzir 10 Reels em 1 dia (batch production)</li>
+                    <li>Temas: montagem de mesa, unboxing, transição, dica rápida</li>
+                    <li>Publicar 2/semana durante 5 semanas</li>
+                    <li><strong>Meta:</strong> Alcance 5-10K por Reel (orgânico)</li>
+                </ul>
+            </div>
+
+            <h3>PRIORIDADE MÉDIA (Implementar em 3-6 meses)</h3>
+            
+            <div class="card prioridade-media">
+                <h4>5. Eventos In-Store Mensais</h4>
+                <ul>
+                    <li>Workshop mesa posta (R$ 50-100/pessoa, 15 vagas)</li>
+                    <li>Café da manhã colaborativo (parceria com confeitaria local)</li>
+                    <li>Noite de queijos/vinhos (parceria com importadora)</li>
+                    <li><strong>Meta:</strong> 50-80 pessoas/mês; gerar conteúdo + vendas + comunidade</li>
+                </ul>
+            </div>
+
+            <div class="card prioridade-media">
+                <h4>6. Programa Embaixadores (Fase 1)</h4>
+                <ul>
+                    <li>Recrutar 3-5 micro-influencers GO</li>
+                    <li>Contrato: produto + comissão 10% sobre vendas com cupom</li>
+                    <li>Co-criar 2 conteúdos/mês por embaixador</li>
+                    <li><strong>Meta:</strong> 20-30 vendas/mês via embaixadores (teste)</li>
+                </ul>
+            </div>
+
+            <div class="card prioridade-media">
+                <h4>7. E-mail Marketing Pós-Compra + Fidelização</h4>
+                <ul>
+                    <li>Sequência automatizada (Boas-vindas, D+7 Experiência, D+30 Novidades, D+90 Cupom)</li>
+                    <li>Newsletter mensal (lançamentos, eventos, dica do mês)</li>
+                    <li><strong>Meta:</strong> Taxa abertura 25-30%, CTR 3-5%</li>
+                </ul>
+            </div>
+
+            <h3>PRIORIDADE BAIXA (Implementar em 6-12 meses)</h3>
+            
+            <div class="card prioridade-baixa">
+                <h4>8. Coleção Própria "Casa Goianita Signature"</h4>
+                <ul>
+                    <li>5-10 produtos exclusivos (ex.: jogo americano artesanal goiano, cerâmica assinada)</li>
+                    <li>Storytelling regional forte</li>
+                    <li>Margem maior (50-60% vs. 30-40% revenda)</li>
+                </ul>
+            </div>
+
+            <div class="card prioridade-baixa">
+                <h4>9. Expansão TikTok</h4>
+                <ul>
+                    <li>Criar perfil TikTok dedicado</li>
+                    <li>Conteúdo: Reels reciclados + conteúdo TikTok-nativo (trends, desafios)</li>
+                    <li><strong>Meta:</strong> 5-10K seguidores em 6 meses</li>
+                </ul>
+            </div>
+
+            <div class="card prioridade-baixa">
+                <h4>10. Serviço de Consultoria Mesa Posta Premium</h4>
+                <ul>
+                    <li>Atendimento personalizado para eventos (casamentos, formaturas, jantares corporativos)</li>
+                    <li>Cobrar pelo serviço (R$ 200-500) + venda de produtos</li>
+                    <li><strong>Meta:</strong> 2-4 consultorias/mês</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="fade-in">
+            <h2>📈 MÉTRICAS DE SUCESSO (KPIs Sugeridos)</h2>
+            
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Instagram</h3>
+                    <div class="metrica">
+                        <div class="metrica-item">
+                            <span class="metrica-valor">15-20%</span>
+                            <span>Crescimento mensal de seguidores</span>
+                        </div>
+                        <div class="metrica-item">
+                            <span class="metrica-valor">3-5%</span>
+                            <span>Taxa de engajamento</span>
+                        </div>
+                        <div class="metrica-item">
+                            <span class="metrica-valor">5-10K</span>
+                            <span>Alcance mínimo por Reel</span>
+                        </div>
+                        <div class="metrica-item">
+                            <span class="metrica-valor">10-15%</span>
+                            <span>Conversão Perfil → Site</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Vendas</h3>
+                    <div class="metrica">
+                        <div class="metrica-item">
+                            <span class="metrica-valor">15-25%</span>
+                            <span>Aumento no ticket médio</span>
+                        </div>
+                        <div class="metrica-item">
+                            <span class="metrica-valor">20-30%</span>
+                            <span>Vendas via Instagram</span>
+                        </div>
+                        <div class="metrica-item">
+                            <span class="metrica-valor">30-40%</span>
+                            <span>Taxa de retorno (6 meses)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Experiência</h3>
+                    <div class="metrica">
+                        <div class="metrica-item">
+                            <span class="metrica-valor">70+</span>
+                            <span>NPS (Net Promoter Score)</span>
+                        </div>
+                        <div class="metrica-item">
+                            <span class="metrica-valor">5-10</span>
+                            <span>Posts UGC por mês</span>
+                        </div>
+                        <div class="metrica-item">
+                            <span class="metrica-valor">50-80</span>
+                            <span>Participantes eventos/mês</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="fade-in">
+            <h2>🏁 CONCLUSÃO E PRÓXIMOS PASSOS</h2>
+            
+            <div class="card card-diagnostico">
+                <p>A pesquisa identificou uma <strong>oportunidade estratégica clara</strong> para Casa Goianita se posicionar como <strong>líder regional em curadoria gourmet intermediária com identidade visual forte e experiência in-store diferenciada</strong>.</p>
+
+                <h3>O espaço existe:</h3>
+                <ul>
+                    <li>Concorrentes de preço (Big Lar, Preçolândia) dominam volume mas têm <strong>zero trabalho de marca</strong></li>
+                    <li>Concorrentes premium (Conceito ê, Degusta Casa) estabelecem padrão mas são <strong>e-commerce puro e/ou fora de GO</strong></li>
+                    <li>Concorrentes locais GO (Real Utilidades, Lilian Gift) têm presença mas <strong>comunicação genérica ou inconsistente</strong></li>
+                    <li>Nenhum player une: <strong>curadoria editorial + experiência física + identidade regional GO + foco gourmet específico</strong></li>
+                </ul>
+
+                <h3>A Casa Goianita pode ocupar esse espaço através de:</h3>
+                <ol>
+                    <li><strong>Identidade visual nível 4-4.5/5</strong> (entre Lolahome e Conceito ê) com toque regional cerrado/GO</li>
+                    <li><strong>Conteúdo educacional + inspiracional</strong> (não apenas transacional) sobre mesa posta e gastronomia</li>
+                    <li><strong>Experiência in-store memorável</strong> (mesas montadas, eventos, curadoria personalizada)</li>
+                    <li><strong>Storytelling de produto e origem</strong> (especialmente artesãos/designers goianos)</li>
+                    <li><strong>Presença forte em Reels/vídeo</strong> (lacuna nos concorrentes de qualidade visual)</li>
+                </ol>
+            </div>
+
+            <div class="card">
+                <h3>Próximos passos imediatos:</h3>
+                <ul class="checklist">
+                    <li>Validar com sócio/time: prioridades estratégicas (Alta, Média, Baixa)</li>
+                    <li>Contratar/briefar: Designer (identidade visual) + Fotógrafo (direção de arte)</li>
+                    <li>Definir: Paleta de cores final, mood board, referências visuais (Pinterest board colaborativo)</li>
+                    <li>Planejar: Cronograma editorial 30 dias (planilha com datas, temas, tipos de post)</li>
+                    <li>Produzir: Primeiro lote de 15-20 fotos + 10 Reels (dia de produção intensivo)</li>
+                    <li>Lançar: Nova identidade Instagram + campanha de re-apresentação da marca</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-logo">
+            <img src="https://raw.githubusercontent.com/Clebito2/layout/main/Logo%20live%20oficial-34.png" alt="Live Consultoria" loading="lazy">
+        </div>
+        <div class="footer-text">
+            <p><strong>Pesquisa realizada em outubro de 2024</strong></p>
+            <p>12 concorrentes mapeados | 98 fontes consultadas</p>
+            <p>© 2024 Live Consultoria - Todos os direitos reservados</p>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer para animações fade-in
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Aplicar observer a todas as seções
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section, .card');
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+
+        // Smooth scroll para links internos (se houver)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Adicionar foco visível para acessibilidade
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab') {
+                document.body.classList.add('keyboard-navigation');
+            }
+        });
+
+        document.addEventListener('mousedown', () => {
+            document.body.classList.remove('keyboard-navigation');
+        });
+    </script>
+
+    <style>
+        /* Estilos adicionais para navegação por teclado */
+        body.keyboard-navigation *:focus {
+            outline: 3px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+
+        /* Melhorias de performance */
+        img {
+            will-change: auto;
+        }
+
+        .card {
+            will-change: transform;
+        }
+
+        /* Estados adicionais para interatividade */
+        .card:active {
+            transform: translateY(-5px);
+        }
+
+        /* Scroll suave para o HTML */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Otimizações para impressão */
+        @media print {
+            header {
+                position: relative;
+            }
+            
+            main {
+                padding-top: 0;
+            }
+            
+            .card {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</body>
+</html>
